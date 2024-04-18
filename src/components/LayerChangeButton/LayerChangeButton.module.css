@@ -1,0 +1,18 @@
+.button {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    height: 60px;
+    width: 60px;
+    background-color: white;
+    z-index: 10000;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column-reverse;
+    padding: 6px;
+    font-size: 12px;
+}
+.button span {
+    color: white;
+}
