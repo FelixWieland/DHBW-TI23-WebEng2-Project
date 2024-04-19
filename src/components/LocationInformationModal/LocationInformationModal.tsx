@@ -14,9 +14,9 @@ export const LocationInformationModal: React.FC<LocationInformationModalProps> =
         <IonModal
             ref={modal}
             trigger="open-modal"
-            isOpen={true}
-            initialBreakpoint={0.10}
-            breakpoints={[0.10, 0.5, 0.75]}
+            isOpen={false}
+            initialBreakpoint={0.25}
+            breakpoints={[0.25, 0.5, 0.75]}
             backdropDismiss={false}
             backdropBreakpoint={0}
         >
