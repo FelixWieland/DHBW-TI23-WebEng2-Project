@@ -23,7 +23,7 @@ export const LayerChangeButton: React.FC<LayerChangeButtonProps> = ({
     const onClick = useCallback(() => onChange(swappedVariant), [swappedVariant])
 
     return (<>
-        <div 
+        <div
             onClick={onClick}
             className={`
                 ion-activatable 
@@ -38,7 +38,7 @@ export const LayerChangeButton: React.FC<LayerChangeButtonProps> = ({
         >
             <IonRippleEffect></IonRippleEffect>
             <span>
-                {swappedVariant}
+                {swappedVariant == "sat" ? "Satelit" : "Straße"}
             </span>
         </div>
     </>
