@@ -1,7 +1,0 @@
-{
-  "name": "tripster",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "react-vite"
-}

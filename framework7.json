@@ -1,0 +1,19 @@
+{
+  "cwd": "/Users/felixwieland/Documents/Development/GitHub/DHBW-TI23-WebEng2-Project",
+  "type": [
+    "pwa",
+    "web"
+  ],
+  "name": "locatify",
+  "framework": "react",
+  "template": "single-view",
+  "bundler": "vite",
+  "cssPreProcessor": "less",
+  "theming": {
+    "customColor": false,
+    "color": "#007aff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}

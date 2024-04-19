@@ -1,0 +1,15 @@
+
+
+.location-information-content-root {
+
+}
+
+.location-information-content-root h1 {
+    padding: 12px;
+    padding-bottom: 0px;
+    font-size: 16px;
+}
+
+.location-information-content-action-toolbar .toolbar-inner {
+    padding-left: 10px;
+}

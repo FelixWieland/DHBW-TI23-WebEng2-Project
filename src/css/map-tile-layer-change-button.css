@@ -1,0 +1,4 @@
+.map-tile-layer-change-button-fab > a {
+    background: var(--f7-block-strong-bg-color);
+    color: var(--f7-block-strong-text-color);
+}
