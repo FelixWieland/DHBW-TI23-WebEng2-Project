@@ -28,6 +28,7 @@ import './theme/variables.css';
 import { InteractiveMap } from './components/InteractiveMap';
 import { LayerChangeButton, TileVariant } from './components/LayerChangeButton';
 import { useState } from 'react';
+import { LocationInformationModal } from './components/LocationInformationModal/LocationInformationModal';
 
 const dhbwLatLngTuple: [number, number, number?] = [47.6655626961182, 9.447195457639792, undefined]
 
@@ -51,6 +52,7 @@ const App: React.FC = () => {
             tileVariant={tileVariant}
             onChange={setTileVariant}
           />
+          <LocationInformationModal />
         </IonContent>
       </IonPage>
     </IonApp>
