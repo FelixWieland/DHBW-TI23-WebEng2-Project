@@ -18,12 +18,12 @@ export const LocationInformationModal: React.FC<LocationInformationModalProps> =
         <IonModal
             ref={modal}
             isOpen={Boolean(content)}
-            initialBreakpoint={0.25}
-            breakpoints={[0.25, 0.5, 0.75]}
+            initialBreakpoint={0.10}
+            breakpoints={[0, 0.10, 0.75]}
             backdropDismiss={false}
             backdropBreakpoint={0}
+            canDismiss={true}
             onWillDismiss={onDismiss}
-            onAbort={onDismiss}
         >
             <IonContent className="ion-padding">
                 {content}
