@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { LatLngExpression, map, Map, tileLayer } from 'leaflet'
+import {LatLngExpression, LeafletMouseEvent, map, Map, tileLayer} from 'leaflet'
 import { TileVariant } from "../LayerChangeButton";
 
 import styles from './InteractiveMap.module.css'
@@ -55,6 +55,15 @@ export const InteractiveMap: React.FC<MapProps> = ({
       }
     }
   }, [leaflet, tileVariant])
+
+  useEffect(():void => {
+    if (!leaflet) return;
+
+    leaflet.addEventListener("click", (e:LeafletMouseEvent):void => {
+      console.log(e.latlng);
+      ///TODO: Modal öffnen (LatLng übergeben)
+    });
+  }, [leaflet]);
 
   return (
     <div className={styles.root} ref={initLeaflet}>
