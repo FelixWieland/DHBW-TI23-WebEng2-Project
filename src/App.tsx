@@ -31,6 +31,7 @@ import { useCallback, useState } from 'react';
 import { LocationInformationModal } from './components/LocationInformationModal/LocationInformationModal';
 import { LatLng } from 'leaflet';
 import { LocationInformationContent } from './components/LocationInformationContent';
+import { useLocalStorageState } from './hooks/useLocalStorageState';
 
 const dhbwLatLngTuple: [number, number, number?] = [47.6655626961182, 9.447195457639792, undefined]
 
@@ -39,7 +40,7 @@ setupIonicReact({
 });
 
 const App: React.FC = () => {
-  const [tileVariant, setTileVariant] = useState<TileVariant>('street')
+  const [tileVariant, setTileVariant] = useLocalStorageState<TileVariant>('leaflet-tile-variant', 'street')
   const [location, setLocation] = useState<LatLng | null>(null)
 
   const onLocationSelection = useCallback((latLng: LatLng) => setLocation(latLng), [])
