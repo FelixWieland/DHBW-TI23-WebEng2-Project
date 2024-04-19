@@ -27,8 +27,10 @@ import './theme/variables.css';
 /* Components */
 import { InteractiveMap } from './components/InteractiveMap';
 import { LayerChangeButton, TileVariant } from './components/LayerChangeButton';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { LocationInformationModal } from './components/LocationInformationModal/LocationInformationModal';
+import { LatLng } from 'leaflet';
+import { LocationInformationContent } from './components/LocationInformationContent';
 
 const dhbwLatLngTuple: [number, number, number?] = [47.6655626961182, 9.447195457639792, undefined]
 
@@ -38,8 +40,11 @@ setupIonicReact({
 
 const App: React.FC = () => {
   const [tileVariant, setTileVariant] = useState<TileVariant>('street')
+  const [location, setLocation] = useState<LatLng | null>(null)
 
-  console.log(tileVariant)
+  const onLocationSelection = useCallback((latLng: LatLng) => setLocation(latLng), [])
+  const onClearLocation = useCallback(() => setLocation(null), [])
+
   return (
     <IonApp>
       <IonPage>
@@ -47,12 +52,16 @@ const App: React.FC = () => {
           <InteractiveMap
             latLngExpression={dhbwLatLngTuple}
             tileVariant={tileVariant}
+            onLocationSelection={onLocationSelection}
           />
           <LayerChangeButton
             tileVariant={tileVariant}
             onChange={setTileVariant}
           />
-          <LocationInformationModal />
+          <LocationInformationModal 
+            onDismiss={onClearLocation}
+            content={location ? <LocationInformationContent latLng={location} /> : null}
+          />
         </IonContent>
       </IonPage>
     </IonApp>

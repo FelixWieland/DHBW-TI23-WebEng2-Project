@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import {LatLngExpression, LeafletMouseEvent, map, Map, tileLayer} from 'leaflet'
+import {LatLng, LatLngExpression, LeafletMouseEvent, map, Map, tileLayer} from 'leaflet'
 import { TileVariant } from "../LayerChangeButton";
 
 import styles from './InteractiveMap.module.css'
@@ -8,6 +8,7 @@ import 'leaflet/dist/leaflet.css'
 interface MapProps {
   latLngExpression: LatLngExpression
   tileVariant: TileVariant
+  onLocationSelection: (latLng: LatLng) => void
 }
 
 const deTiles = 'https://tile.openstreetmap.de/{z}/{x}/{y}.png'
@@ -19,7 +20,8 @@ const deLayer = tileLayer(deTiles, tileOptions)
 
 export const InteractiveMap: React.FC<MapProps> = ({
   latLngExpression,
-  tileVariant
+  tileVariant,
+  onLocationSelection
 }) => {
   const [leaflet, setLeaflet] = useState<Map | null>(null)
   const initLeaflet = useCallback((div: HTMLDivElement | null) => {
@@ -62,8 +64,9 @@ export const InteractiveMap: React.FC<MapProps> = ({
     leaflet.addEventListener("click", (e:LeafletMouseEvent):void => {
       console.log(e.latlng);
       ///TODO: Modal öffnen (LatLng übergeben)
+      onLocationSelection(e.latlng)
     });
-  }, [leaflet]);
+  }, [leaflet, onLocationSelection]);
 
   return (
     <div className={styles.root} ref={initLeaflet}>
