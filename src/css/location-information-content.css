@@ -1,7 +1,15 @@
 
+.location-information-content-loader {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-top: calc(15vh / 2 - 17px);
+}
 
 .location-information-content-root {
-
+    height: 100vh;
 }
 
 .location-information-content-root h1 {

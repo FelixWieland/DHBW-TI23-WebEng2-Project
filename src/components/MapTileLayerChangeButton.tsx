@@ -1,4 +1,4 @@
-import { Fab, Icon, FabButtons, FabButton, Actions, ActionsButton, ActionsGroup } from "framework7-react"
+import { Fab, Icon, Actions, ActionsButton, ActionsGroup } from "framework7-react"
 import { TileVariant, availableTileLayers } from "../functions/interactiveMap"
 import { useCallback, useState } from "react"
 import '../css/map-tile-layer-change-button.css'
@@ -32,7 +32,7 @@ export const MapTileVariantChangeButton: React.FC<MapTileVariantChangeButtonProp
                             slot="media"
                             src={`/thumbnails/map-${layer}.png`}
                             width="48"
-                            style={{ maxWidth: '100%', borderRadius: '8px' }}
+                            style={{ maxWidth: '100%', borderRadius: '8px', border: layer === tileVariant ? '4px solid gray' : '' }}
                             onClick={() => onChangeTileVariant(layer)}
                         />
                         <span>{layer}</span>

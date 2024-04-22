@@ -42,6 +42,7 @@ const LocatifyApp = () => {
           <InteractiveMap 
             latLngExpression={dhbwLatLngTuple}
             tileVariant={tileVariant}
+            selectedLocation={location}
             onLocationSelection={onLocationSelection}
           />
           <LocationInformationModal 
