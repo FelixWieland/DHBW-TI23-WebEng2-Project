@@ -1,6 +1,4 @@
-import { Sheet, View } from "framework7-react";
-import { LatLng } from "leaflet";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { Sheet } from "framework7-react";
 import '../css/location-information-modal.css'
 
 interface LocationInformationModalProps {

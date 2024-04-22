@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 
 import {
   f7ready,
@@ -16,6 +16,7 @@ import { useLocalStorageState } from '../hooks/useLocalStorageState';
 import { LocationInformationContent } from './LocationInformationContent';
 import { LocationInformationModal } from './LocationInformationModal';
 import { MapTileVariantChangeButton } from './MapTileLayerChangeButton';
+import { LocationInformationSidePanel } from './LocationInformationSidePanel';
 
 const f7params = {
   name: 'locatify',
@@ -35,6 +36,8 @@ const LocatifyApp = () => {
   const onLocationSelection = useCallback((latLng: LatLng) => setLocation(latLng), [])
   const onClearLocation = useCallback(() => setLocation(null), [])
 
+  const content = useMemo(() => location ? <LocationInformationContent latLng={location} /> : null, [location])
+
   return (
     <App {...f7params}>
       <View main>
@@ -45,9 +48,13 @@ const LocatifyApp = () => {
             selectedLocation={location}
             onLocationSelection={onLocationSelection}
           />
+          <LocationInformationSidePanel 
+              onDismiss={onClearLocation}
+              content={content}
+          />
           <LocationInformationModal 
             onDismiss={onClearLocation}
-            content={location ? <LocationInformationContent latLng={location} /> : null}
+            content={content}
           />
           <MapTileVariantChangeButton 
             tileVariant={tileVariant}

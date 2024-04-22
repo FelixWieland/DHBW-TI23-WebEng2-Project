@@ -33,3 +33,13 @@
 .location-information-modal-content {
     margin-top: 15px;
 }
+
+
+.location-information-modal-root {
+    display: none !important;
+}
+@media only screen and (max-width: 700px) {
+    .location-information-modal-root {
+        display: block !important;
+    }
+}
