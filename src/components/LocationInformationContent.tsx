@@ -41,7 +41,7 @@ export const LocationInformationContent: React.FC<LocationInformationContentProp
                 </swiper-slide>
             ))}
         </swiper-container>
-    </>, [])
+    </>, [wikipediaInformation])
 
     return (
         <div className="location-information-content-root">
