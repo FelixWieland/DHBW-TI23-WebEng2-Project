@@ -11,13 +11,15 @@ interface MapProps {
   tileVariant: TileVariant,
   selectedLocation: LatLng | null,
   onLocationSelection: (latLng: LatLng) => void
+  ownLocation: LatLng | null,
 }
 
 export const InteractiveMap: React.FC<MapProps> = ({
   latLngExpression,
   tileVariant,
   selectedLocation,
-  onLocationSelection
+  onLocationSelection,
+  ownLocation
 }) => {
   const [leaflet, setLeaflet] = useState<Map | null>(null)
   const initLeaflet = useCallback((div: HTMLDivElement | null) => {

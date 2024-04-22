@@ -17,6 +17,7 @@ import { LocationInformationContent } from './LocationInformationContent';
 import { LocationInformationModal } from './LocationInformationModal';
 import { MapTileVariantChangeButton } from './MapTileLayerChangeButton';
 import { LocationInformationSidePanel } from './LocationInformationSidePanel';
+import { LocateSelfButton } from './LocateSelfButton';
 
 const f7params = {
   name: 'locatify',
@@ -31,12 +32,13 @@ const dhbwLatLngTuple: [number, number, number?] = [47.6655626961182, 9.44719545
 
 const LocatifyApp = () => {
   const [tileVariant, setTileVariant] = useLocalStorageState<TileVariant>('leaflet-tile-variant', 'street')
-  const [location, setLocation] = useState<LatLng | null>(null)
+  const [selectedLocation, setSelectedLocation] = useState<LatLng | null>(null)
+  const [ownLocation, setOwnLocation] = useState<LatLng | null>(null)
 
-  const onLocationSelection = useCallback((latLng: LatLng) => setLocation(latLng), [])
-  const onClearLocation = useCallback(() => setLocation(null), [])
+  const onLocationSelection = useCallback((latLng: LatLng) => setSelectedLocation(latLng), [])
+  const onClearLocation = useCallback(() => setSelectedLocation(null), [])
 
-  const content = useMemo(() => location ? <LocationInformationContent latLng={location} /> : null, [location])
+  const content = useMemo(() => selectedLocation ? <LocationInformationContent latLng={selectedLocation} /> : null, [location])
 
   return (
     <App {...f7params}>
@@ -45,8 +47,9 @@ const LocatifyApp = () => {
           <InteractiveMap 
             latLngExpression={dhbwLatLngTuple}
             tileVariant={tileVariant}
-            selectedLocation={location}
+            selectedLocation={selectedLocation}
             onLocationSelection={onLocationSelection}
+            ownLocation={ownLocation}
           />
           <LocationInformationSidePanel 
               onDismiss={onClearLocation}
@@ -55,6 +58,9 @@ const LocatifyApp = () => {
           <LocationInformationModal 
             onDismiss={onClearLocation}
             content={content}
+          />
+          <LocateSelfButton 
+            onChangeOwnLocation={setOwnLocation}
           />
           <MapTileVariantChangeButton 
             tileVariant={tileVariant}
