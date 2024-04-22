@@ -16,9 +16,12 @@ export const LocationInformationContent: React.FC<LocationInformationContentProp
         loadingGeoInformation
     } = useLocationInformation(latLng)
 
+
+    const title = useMemo(() =>  geoInformation ? `${geoInformation.subcity || ''} ${geoInformation.subcity && geoInformation.city ? '(' : ''}${geoInformation.city || ''}${geoInformation.subcity && geoInformation.city ? ')' : ''}` : '', [geoInformation])
+
     const loaderJsx = useMemo(() => <div className="location-information-content-loader"><Preloader /></div>, [])
     const geoInformationJsx = useMemo(() => !geoInformation ? null : <>
-        <h1>{geoInformation.name}</h1>
+        <h1>{title}</h1>
         <Toolbar className="location-information-content-action-toolbar">
             <Button small fill round>
                 Route
