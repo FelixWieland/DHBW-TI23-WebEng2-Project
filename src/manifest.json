@@ -1,12 +1,12 @@
 {
   "name": "locatify",
   "short_name": "locatify",
-  "description": "locatify",
-  "lang": "en-US",
+  "description": "A Google maps clone",
+  "lang": "de-DE",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#EE350F",
-  "theme_color": "#EE350F",
+  "background_color": "#0a1e29",
+  "theme_color": "#0a1e29",
   "icons": [
     {
       "src": "/icons/128x128.png",
