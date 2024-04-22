@@ -33,13 +33,14 @@ export const LocationInformationContent: React.FC<LocationInformationContentProp
         <swiper-container
             space-between="10"
             slides-per-view="auto"
-            pagination={true}
+            class="location-information-content-swiper"
         >
             {wikipediaInformation.map(entry => (
                 <swiper-slide key={entry.pageid}>
                     <WikipediaResultCard information={entry} />
                 </swiper-slide>
             ))}
+            <div className="swiper-pagination"></div>
         </swiper-container>
     </>, [wikipediaInformation])
 

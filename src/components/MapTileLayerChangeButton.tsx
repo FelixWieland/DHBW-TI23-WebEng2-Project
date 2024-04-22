@@ -27,7 +27,7 @@ export const MapTileVariantChangeButton: React.FC<MapTileVariantChangeButtonProp
         >
             <ActionsGroup>
                 {availableTileLayers.map(layer => (
-                    <ActionsButton>
+                    <ActionsButton key={layer}>
                         <img
                             slot="media"
                             src={`/thumbnails/map-${layer}.png`}
