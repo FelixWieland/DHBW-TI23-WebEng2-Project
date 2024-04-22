@@ -5,20 +5,35 @@ export type GeoInformation = {
     subcity?: string,
     houseNumber?: string,
     history?: string,
-    place?: string
+    place?: string,
+    title?: string
 }
 
-
+export type WikipediaInformation = {
+    ns: number,
+    title: string,
+    pageid: string,
+    size: string,
+    wordcount: number,
+    snippet: string,
+    timestamp: string
+}
 
 export async function fetchGeoInformation(latLng: LatLng): Promise<GeoInformation> {
-    const adress = `https://nominatim.openstreetmap.org/reverse?lat=${latLng.lat}&lon=${latLng.lng}&format=json`
-    const resp = await fetch(adress)
+    const address = `https://nominatim.openstreetmap.org/reverse?lat=${latLng.lat}&lon=${latLng.lng}&format=json`
+    const resp = await fetch(address)
     const json = await resp.json() as any
     return unifyaddress(json)
 }
 
+export async function fetchWikipediaInformation(search: string): Promise<Array<WikipediaInformation>> {
+    const address = `https://de.wikipedia.org/w/api.php?action=query&format=json&list=search&origin=*&srsearch=${encodeURIComponent(search)}`
+    const resp = await fetch(address)
+    const json = await resp.json() as any
+    return json.query.search
+}
+
 function unifyaddress(rawGeoInformation: any): GeoInformation {
-    let city: string | null = null;
     const address = rawGeoInformation.address;
 
     const data: GeoInformation = {}
@@ -29,7 +44,9 @@ function unifyaddress(rawGeoInformation: any): GeoInformation {
             data.city = address.town
         }
 
-        if (address.suburb != null) {
+        if (address.amenity != null) {
+            data.subcity = address.amenity
+        } else if (address.suburb != null) {
             data.subcity = address.suburb
         } else if (address.village != null) {
             data.subcity = address.village
@@ -61,5 +78,20 @@ function unifyaddress(rawGeoInformation: any): GeoInformation {
             data.place = address.leisure
         }
     }
+
+    if (data.city) {
+        if (data.subcity) {
+            if (data.subcity.includes(data.city)) {
+                data.title = data.subcity
+            } else {
+                data.title = `${data.subcity} (${data.city})` 
+            }
+        } else {
+            data.title = data.city
+        }
+    } else if (data.subcity) {
+        data.title = data.subcity
+    }
+
     return data
 }

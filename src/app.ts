@@ -21,8 +21,9 @@ import App from './components/LocatifyApp.tsx';
 import Sheet from 'framework7/components/sheet';
 import Fab from 'framework7/components/fab';
 import Actions from 'framework7/components/actions'
+import Swiper from 'framework7/components/swiper'
 
-Framework7.use([Sheet, Fab, Actions])
+Framework7.use([Sheet, Fab, Actions, Swiper])
 
 // Init F7 React Plugin
 Framework7.use(Framework7React)
