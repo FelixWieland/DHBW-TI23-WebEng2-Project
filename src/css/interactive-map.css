@@ -13,7 +13,15 @@
     fill: rgb(216,81,64);
 }
 
+.fill-grey {
+    fill: rgb(104, 104, 104);
+}
+
 .leaflet-div-icon {
     background: transparent !important;
     border: none !important;
+}
+
+.leaflet-routing-container {
+    display: none;
 }

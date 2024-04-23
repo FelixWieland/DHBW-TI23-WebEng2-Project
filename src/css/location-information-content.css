@@ -26,3 +26,12 @@
 .location-information-content-action-toolbar .toolbar-inner {
     padding-left: 10px;
 }
+
+.location-information-content-swiper {
+    padding-top: 15px;
+}
+
+.location-information-content-swiper::part(pagination) {
+    position: absolute;
+    top: -7.5px;
+}

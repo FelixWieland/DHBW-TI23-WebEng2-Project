@@ -1,16 +1,21 @@
 import { LatLng } from "leaflet";
-import '../css/location-information-content.css'
-import { Button, Card, Preloader, Toolbar } from "framework7-react";
+import { Button, Preloader, Toolbar } from "framework7-react";
 import { useLocationInformation } from "../hooks/useLocationInformation";
 import { useMemo } from "react";
 import { WikipediaResultCard } from "./WikipediaResultCard";
+import { RoutingData } from "../functions/routing";
+import '../css/location-information-content.css'
 
 interface LocationInformationContentProps {
     latLng: LatLng,
+    routingData: RoutingData | null,
+    onRouteStart: () => void
 }
 
 export const LocationInformationContent: React.FC<LocationInformationContentProps> = ({
-    latLng
+    latLng,
+    routingData,
+    onRouteStart,
 }) => {
     const {
         geoInformation,
@@ -20,20 +25,28 @@ export const LocationInformationContent: React.FC<LocationInformationContentProp
     } = useLocationInformation(latLng)
 
     const loaderJsx = useMemo(() => <div className="location-information-content-loader"><Preloader /></div>, [])
+
+    const routingDataJsx = useMemo(() => !routingData ? null : (
+        (routingData.totalDistance >= 1000 ? `${(routingData.totalDistance / 1000).toFixed(2)}km` : `${routingData.totalDistance}m`)
+    ), [routingData])
+
     const geoInformationJsx = useMemo(() => !geoInformation ? null : <>
         <h1>{geoInformation.title}</h1>
         <Toolbar className="location-information-content-action-toolbar">
-            <Button small fill round>
-                Route
-            </Button>
+            {routingData ? routingDataJsx : (
+                <Button small fill round onClick={onRouteStart}>
+                    Route
+                </Button>
+            )}
         </Toolbar>
-    </>, [geoInformation])
+    </>, [geoInformation, onRouteStart])
 
     const wikipediaInformationJsx = useMemo(() => !wikipediaInformation ? null : <>
         <swiper-container
             space-between="10"
             slides-per-view="auto"
             class="location-information-content-swiper"
+            pagination
         >
             {wikipediaInformation.map(entry => (
                 <swiper-slide key={entry.pageid}>

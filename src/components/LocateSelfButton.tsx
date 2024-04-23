@@ -1,7 +1,7 @@
-import { Fab, Icon } from "framework7-react"
+import { Fab, Icon, Preloader } from "framework7-react"
 import '../css/map-tile-layer-change-button.css'
 import { LatLng } from "leaflet"
-import { useCallback } from "react"
+import { useCallback, useState } from "react"
 import { getGeoLocation } from "../functions/locateSelf"
 
 interface LocateSelfButtonProps {
@@ -11,12 +11,18 @@ interface LocateSelfButtonProps {
 export const LocateSelfButton: React.FC<LocateSelfButtonProps> = ({
     onChangeOwnLocation
 }) => {
-    const onLocateSelf = useCallback(() => getGeoLocation(onChangeOwnLocation), [])
+    const [locationLoading, setLocationLoading] = useState(false)
+    const onLocateSelf = useCallback(() => {
+        setLocationLoading(true)
+        getGeoLocation((loc) => {
+            onChangeOwnLocation(loc)
+            setLocationLoading(false)
+        })
+    }, [])
     
-    return (<>
+    return (
         <Fab className="map-tile-layer-change-button-fab" style={{ marginBottom: 65 }} position="right-bottom" slot="fixed" onClick={onLocateSelf}>
-            <Icon ios="material:my_location" md="material:my_location" />
+            {locationLoading ? <Preloader /> : <Icon ios="material:my_location" md="material:my_location" />}
         </Fab>
-    </>
     )
 }
