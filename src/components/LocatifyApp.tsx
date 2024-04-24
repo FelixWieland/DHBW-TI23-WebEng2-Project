@@ -62,7 +62,11 @@ const LocatifyApp = () => {
     }
   }, [ownLocation])
 
-  const onClearLocation = useCallback(() => setSelectedLocation(null), [])
+  const onClearLocation = useCallback(() => {
+    setRoutingData(null)
+    setRoutingControl(null)
+    setSelectedLocation(null)
+  }, [])
 
   const content = useMemo(() => selectedLocation ? 
     <LocationInformationContent 
