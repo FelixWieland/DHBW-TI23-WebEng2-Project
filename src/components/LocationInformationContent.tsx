@@ -26,20 +26,26 @@ export const LocationInformationContent: React.FC<LocationInformationContentProp
 
     const loaderJsx = useMemo(() => <div className="location-information-content-loader"><Preloader /></div>, [])
 
-    const routingDataJsx = useMemo(() => !routingData ? null : (
+    const routingDataDistanceJsx = useMemo(() => !routingData ? null : (
         (routingData.totalDistance >= 1000 ? `${(routingData.totalDistance / 1000).toFixed(2)}km` : `${routingData.totalDistance}m`)
     ), [routingData])
+
+    const routingDataDurationJsx = useMemo(() => !routingData ? null : (
+        (routingData.totalDuration >= 60 ? `${(routingData.totalDuration / 60).toFixed(2)}min` : `${routingData.totalDuration}sec`)
+    ), [routingData]) 
 
     const geoInformationJsx = useMemo(() => !geoInformation ? null : <>
         <h1>{geoInformation.title}</h1>
         <Toolbar className="location-information-content-action-toolbar">
-            {routingData ? routingDataJsx : (
+            {routingData ? <>
+                {routingDataDistanceJsx} - {routingDataDurationJsx}
+            </> : (
                 <Button small fill round onClick={onRouteStart}>
                     Route
                 </Button>
             )}
         </Toolbar>
-    </>, [geoInformation, onRouteStart])
+    </>, [geoInformation, onRouteStart, routingDataDistanceJsx])
 
     const wikipediaInformationJsx = useMemo(() => !wikipediaInformation ? null : <>
         <swiper-container
