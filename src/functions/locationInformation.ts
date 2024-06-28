@@ -79,18 +79,19 @@ function unifyaddress(rawGeoInformation: any): GeoInformation {
         }
     }
 
+
     if (data.city) {
         if (data.subcity) {
             if (data.subcity.includes(data.city)) {
-                data.title = data.subcity
+                data.title = `${address.postcode || ''} ${data.subcity}`
             } else {
-                data.title = `${data.subcity} (${data.city})` 
+                data.title = `${address.postcode || ''} ${data.subcity} (${data.city})` 
             }
         } else {
-            data.title = data.city
+            data.title = `${address.postcode || ''} ${data.city}`
         }
     } else if (data.subcity) {
-        data.title = data.subcity
+        data.title = `${address.postcode || ''} ${data.subcity}`
     }
 
     return data
