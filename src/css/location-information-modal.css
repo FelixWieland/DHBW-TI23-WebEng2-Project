@@ -43,3 +43,7 @@
         display: block !important;
     }
 }
+
+.location-information-modal-root { 
+    --f7-sheet-breakpoint: calc(85vh) !important; 
+}

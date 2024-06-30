@@ -11,9 +11,6 @@ export const LocationInformationModal: React.FC<LocationInformationModalProps> =
     onDismiss
 }) => {
     return (<>
-        <style dangerouslySetInnerHTML={{
-            __html: `.location-information-modal-root { --f7-sheet-breakpoint: calc(85vh); }`
-        }} />
         <Sheet
             opened={Boolean(content)}
             onSheetClosed={onDismiss}
